@@ -1,8 +1,9 @@
 import express, { Application } from 'express';
 import { connection } from './database';
 import { AppRouter } from './AppRouter';
-import './Controllers/PostController'
-import './Controllers/CommentsController'
+import cors from 'cors';
+import './Controllers/PostController';
+import './Controllers/CommentsController';
 export class App {
 	app: Application;
 	PORT: number | string;
@@ -15,6 +16,7 @@ export class App {
 	}
 	middlewares(): void {
 		this.app.use(express.json());
+		this.app.use(cors());
 	}
 	database(): void {
 		connection();

@@ -29,10 +29,7 @@ class PostController {
 	async getOnePost(req: Request, res: Response): Promise<Response> {
 		try {
 			const { id } = req.params;
-			const post = await getRepository(Post)
-				.createQueryBuilder()
-				.where('id = :id', { id })
-				.getOne();
+			const post = await getRepository(Post).findOne(id,{relations: ['comments']})
 			if (post) {
 				return res.json(post);
 			}
